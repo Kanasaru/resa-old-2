@@ -1,4 +1,4 @@
-![alt text](https://github.com/kanasaru/resa/blob/main/docs/header.png?raw=true)
+![alt text](https://github.com/kanasaru/resa/blob/main/doc/header.png?raw=true)
 
 # resa
 Simple and very straight forward. You are a lord or king or whatever and get into an unknown, island based, world. You got your ship, some materials and some gold. Now you need to develop your chosen island into a great trading and self-sustaining city. If you lose all your money or your population ist starving to death or leaves your city for other reasons you are defeated.
