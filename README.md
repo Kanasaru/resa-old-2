@@ -30,9 +30,14 @@ Resa is intended as an open source project and therefore lives from people who c
 - _Noto Sans_ by [Google](https://fonts.google.com/), promoted by [font.google.com](https://fonts.google.com/noto/specimen/Noto+Sans/) under [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
 
 ## Music
-- none
+- _In Dreams_ by [Scott Buckley](https://www.scottbuckley.com.au), promoted by [chosic.com](https://www.chosic.com/free-music/all/) under [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+- _Forest Walk_ by [Alexander Nakarada](https://www.serpentsoundstudios.com), promoted by [chosic.com](https://www.chosic.com/free-music/all/) under [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/)
+- _Illusory Realm_ by [Darren Curtis](https://www.darrencurtismusic.com/), promoted by [chosic.com](https://www.chosic.com/free-music/all/) under [Attribution 3.0 Unported (CC BY 3.0)](https://creativecommons.org/licenses/by/3.0/)
+
 ## Sounds
-- none
+- _screenshot.wav_ by [alejandra0908](https://freesound.org/people/alejandra0908/sounds/364499/) published under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+- _btn-click.wav_ by [Christopherderp](https://freesound.org/people/Christopherderp/sounds/342200/) published under [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+
 ## Graphics
 - none
 <br><br>
