@@ -26,7 +26,9 @@ Resa is intended as an open source project and therefore lives from people who c
 
 # Credits
 ## Fonts
+- _Aboreto_ by [Dominik Jáger](https://fonts.google.com/?query=Dominik+Jáger), promoted by [font.google.com](https://fonts.google.com/specimen/Aboreto/) under [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
 - _Noto Sans_ by [Google](https://fonts.google.com/), promoted by [font.google.com](https://fonts.google.com/noto/specimen/Noto+Sans/) under [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
+
 ## Music
 - none
 ## Sounds
