@@ -22,6 +22,7 @@ LFLAGS = -lSDL2-2.0.0 -lSDL2_image-2.0.0 -lSDL2_ttf-2.0.0 -lSDL2_mixer-2.0.0
 
 # source file paths
 SOURCES := $(wildcard $(SRCDIR)/*.c) \
+           $(wildcard $(SRCDIR)/utl/*.c) \
            $(wildcard $(SRCDIR)/mpos/*.c) \
            $(wildcard $(SRCDIR)/world/*.c) \
            $(wildcard $(SRCDIR)/fauna/*.c) \
@@ -43,12 +44,13 @@ $(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c | createdir
 # create object file paths
 createdir:
 	$(call colorecho,4,"Create directories...")
-	@$(mkdir -p $(BINDIR))
-	@$(mkdir -p obj/mpos)
-	@$(mkdir -p obj/world)
-	@$(mkdir -p obj/world/fauna)
-	@$(mkdir -p obj/world/flora)
-	@$(mkdir -p obj/world/objects)
+	mkdir -p $(BINDIR)
+	mkdir -p obj/utl
+	mkdir -p obj/mpos
+	mkdir -p obj/world
+	mkdir -p obj/world/fauna
+	mkdir -p obj/world/flora
+	mkdir -p obj/world/objects
 
 .PHONY: clean
 clean:
@@ -58,4 +60,5 @@ clean:
 .PHONY: remove
 remove: clean
 	@$(rm) $(BINDIR)/$(PROG)
-	$(call colorecho,4,"Executable removed!")
+	@$(rm) $(wildcard $(BINDIR)/*.*)
+	$(call colorecho,4,"Executable and game data removed!")

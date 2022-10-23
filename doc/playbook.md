@@ -46,5 +46,5 @@ Simple and very straight forward. You are a lord or king or whatever and get int
 ## Controls
 - arrow keys and wasd to move the world
 - F2: debug screen
-- F3: grid layout
+- F3: screenshot
 - mouse button left: everything else

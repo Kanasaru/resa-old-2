@@ -6,7 +6,10 @@
 #define __MPOS_H__
 
 #include <stdint.h>
+#include <SDL2/SDL.h>
 
+#define MPOS_TIMER_FORMAT "%s: %f ms"
+#define MPOS_SCREENSHOT_FORMAT "%s%s_%02d-%02d-%02d_%02d-%02d-%02d%s"
 
 typedef struct
 {
@@ -19,9 +22,18 @@ typedef struct
         u_int32_t dt;           /* current delta time */
         u_int64_t mpf_s;        /* ms per frame at start */
         u_int64_t mpf_e;        /* ms per frame at end */
+        u_int64_t tc_s;         /* ms in time capping at start */
+        u_int64_t tc_e;         /* ms in time capping at end */
+        u_int32_t tc_c;         /* time capping counter */
+        u_int32_t tc_r;         /* rounds of time capping */
+        const char *tc_n;       /* time capping name */
     } time;
 } MPOS;
 
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* initialises MPOS */
 MPOS * MPOS_Init(void);
@@ -38,4 +50,19 @@ void MPOS_MpfStart(MPOS * mpos);
 /* caps fps by given frame rate */
 void MPOS_MpfEnd(MPOS * mpos, u_int32_t fps);
 
+/* starts development timer */
+void MPOS_TimerStart(MPOS *mpos, uint32_t r, const char *n);
+
+/* ends development timer */
+void MPOS_TimerEnd(MPOS *mpos);
+
+/* resets development timer */
+void MPOS_TimerReset(MPOS *mpos);
+
+/* takes a screenshot from given renderer to given filename */
+u_int32_t MPOS_TakeScreenshot(SDL_Renderer *r, const char *f);
+
+#ifdef __cplusplus
+}
+#endif
 #endif /* !__MPOS_H__ */

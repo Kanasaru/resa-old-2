@@ -5,6 +5,7 @@
 
 #include "oab.h"
 #include "init.h"
+#include "utl/media.h"
 
 
 void RNV_InitSDL(void)
@@ -63,11 +64,14 @@ void RNV_InitGame(void)
     }
 
     app.state.QUIT = 0;
+
+    RNV_InitMedia();
 }
 
 void RNV_Quit(void)
 {
     MPOS_Destroy(app.mpos);
+    RNV_DestroyMedia();
     SDL_DestroyWindow(app.win);
     Mix_Quit();
     TTF_Quit();
