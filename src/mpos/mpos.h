@@ -8,6 +8,8 @@
 #include <stdint.h>
 #include <SDL2/SDL.h>
 
+#include "mpos/mpos_noise.h"
+
 #define MPOS_TIMER_FORMAT "%s: %f ms"
 #define MPOS_SCREENSHOT_FORMAT "%s%s_%02d-%02d-%02d_%02d-%02d-%02d%s"
 
