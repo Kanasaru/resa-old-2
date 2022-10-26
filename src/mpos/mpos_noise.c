@@ -4,7 +4,6 @@
     Credit:     Source code base by nowl (https://gist.github.com/nowl/828013)
 */
 #include <stdint.h>
-#include <time.h>
 #include <SDL2/SDL.h>
 
 #include "mpos_noise.h"
@@ -31,7 +30,7 @@ static int hash[] = {
 
 u_int16_t MPOS_NoiseSeed(u_int16_t low, u_int16_t high)
 {
-    srand(time(0));
+    srand(SDL_GetPerformanceCounter());
     return (rand() % (high - low + 1)) + low;
 }
 
