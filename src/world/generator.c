@@ -41,13 +41,13 @@ void RNV_GenIslandShape(RNV_Island *island)
 
     size_t i = 0;
     
-    island->seeds.shape = MPOS_NoiseSeed(0, MPOS_NOISE_MAX_VAL);
+    island->seed = MPOS_NoiseSeed(0, MPOS_NOISE_MAX_VAL);
 
     for (size_t y = 0; y < island->rect.h; y++)
     {
         for (size_t x = 0; x < island->rect.w; x++)
         {
-            e = MPOS_NoisePerlin2d(x, y, 0.1f, 4.0f, &island->seeds.shape);
+            e = MPOS_NoisePerlin2d(x, y, 0.1f, 4.0f, &island->seed);
 
             nx = 2.0f * x / island->rect.w - 1.0f;
             ny = 2.0f * y / island->rect.h - 1.0f;
@@ -56,13 +56,11 @@ void RNV_GenIslandShape(RNV_Island *island)
 
             if (e < 0.45f)
             {
-                island->fields[i].layer.water = 0;
-                island->fields[i].layer.island = -1;
+                island->fields[i].layer.terrain = 0;
             } 
             else
             {
-                island->fields[i].layer.island = 1;
-                island->fields[i].layer.water = -1;
+                island->fields[i].layer.terrain = 1;
             }
 
             i++;
@@ -73,16 +71,13 @@ void RNV_GenIslandShape(RNV_Island *island)
 void RNV_GenPrintIslandShape(RNV_Island *island)
 {
     size_t i = 0;
-    printf(">------< Seed: %d >------<\n", island->seeds.shape);
+    printf(">------< Seed: %d >------<\n", island->seed);
     for(size_t y = 0; y < island->rect.h; y++)
     {
         printf("|");
         for(size_t x = 0; x < island->rect.w; x++)
         {
-            if (island->fields[i].layer.water != -1)
-                printf("0|");
-            if (island->fields[i].layer.island != -1)
-                printf("1|");
+            printf("%d|", island->fields[i].layer.terrain);
 
             i++;
         }

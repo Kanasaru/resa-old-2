@@ -41,10 +41,19 @@ Simple and very straight forward. You are a lord or king or whatever and get int
 - minimum resolution: 800 x 600
 - minimum FPS: around 60
 - 2.5D, top-down
-- grid layout in 32x32
 <br><br>
 ## Controls
 - arrow keys and wasd to move the world
 - F2: debug screen
 - F3: screenshot
 - mouse button left: everything else
+<br><br>
+## World structure
+- grid layout in 16x16
+- world devided in fields
+- a field has different layers
+  - layer 1: terrain
+  - layer 2: structures
+  - layer 3: fauna
+  - layer 4: flora
+  - layer 5: objects

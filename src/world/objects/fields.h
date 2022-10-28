@@ -5,12 +5,16 @@
 
 #include "mpos/mpos.h"
 
+
 typedef struct
 {
     struct
     {
-        int32_t water;
-        int32_t island;
+        int32_t terrain;
+        int32_t structures;
+        int32_t fauna;
+        int32_t flora;
+        int32_t objects;
     } layer;
 } RNV_RawField;
 
@@ -20,8 +24,11 @@ typedef struct
     int *key;
     struct
     {
-        MPOS_Sprite water;
-        MPOS_Sprite island;
+        MPOS_Sprite terrain;
+        MPOS_Sprite structures;
+        MPOS_Sprite fauna;
+        MPOS_Sprite flora;
+        MPOS_Sprite objects;
     } layer;
 } RNV_WorldField;
 

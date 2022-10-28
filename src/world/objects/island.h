@@ -11,11 +11,7 @@
 typedef struct
 {
     SDL_Rect rect;
-    struct
-    {
-        u_int16_t shape;
-        u_int16_t flora;
-    } seeds;
+    u_int16_t seed;
     RNV_RawField fields[];
 } RNV_Island;
 

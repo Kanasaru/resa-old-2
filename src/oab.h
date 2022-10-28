@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "mpos/mpos.h"
+#include "world/world.h"
 
 
 #define RNV_SCREEN_WIDTH  800
@@ -26,6 +27,7 @@ typedef struct
     {
         u_int16_t QUIT;           /* game quitting */
     } state;
+    RNV_World *world;
 } App;
 
 App app;
