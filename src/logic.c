@@ -1,5 +1,6 @@
 #include "mpos/mpos.h"
 #include "utl/media.h"
+#include "world/world.h"
 #include "logic.h"
 
 
@@ -13,4 +14,6 @@ void RNV_RunLogic(void)
     {
         /* do things before quitting */
     }
+
+    RNV_WorldUpdate(app.world);
 }

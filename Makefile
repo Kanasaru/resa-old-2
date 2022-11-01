@@ -25,9 +25,9 @@ SOURCES := $(wildcard $(SRCDIR)/*.c) \
            $(wildcard $(SRCDIR)/utl/*.c) \
            $(wildcard $(SRCDIR)/mpos/*.c) \
            $(wildcard $(SRCDIR)/world/*.c) \
-           $(wildcard $(SRCDIR)/fauna/*.c) \
-           $(wildcard $(SRCDIR)/flora/*.c) \
-           $(wildcard $(SRCDIR)/objects/*.c)
+           $(wildcard $(SRCDIR)/world/fauna/*.c) \
+           $(wildcard $(SRCDIR)/world/flora/*.c) \
+           $(wildcard $(SRCDIR)/world/objects/*.c)
 # object files
 OBJECTS := $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm       = rm -f

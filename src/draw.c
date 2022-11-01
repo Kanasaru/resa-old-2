@@ -9,6 +9,8 @@ void RNV_Draw(void)
 {
     RNV_PrepareScreen();
 
+    RNV_WorldDraw(app.world, app.renderer);
+
     RNV_DrawPanel();
 
     RNV_PresentScreen();

@@ -9,10 +9,12 @@
 
 #define RNV_WORLD_WIDTH  100
 #define RNV_WORLD_HEIGHT 60
-#define RNV_WORLD_TILE_WIDTH 16
-#define RNV_WORLD_TILE_HEIGHT 16
+#define RNV_WORLD_TILE_WIDTH 32
+#define RNV_WORLD_TILE_HEIGHT 32
 
 #define RNV_SPSH_TILES "res/sprites/rnv_tiles_32x32.png"
+#define RNV_SPSH_K_WATER 2
+#define RNV_SPSH_K_GRAS 3
 
 #define RNV_WORLD_MOVE_NO    0x00
 #define RNV_WORLD_MOVE_UP    0x01

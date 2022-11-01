@@ -50,5 +50,7 @@ void RNV_HandleEvents(void)
             }
             break;
         }
+
+        RNV_WorldHandleEvent(app.world, event);
     }
 }

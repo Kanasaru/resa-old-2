@@ -21,7 +21,7 @@ typedef struct
 typedef struct
 {
     SDL_Rect *rect;
-    int *key;
+    u_int32_t *key;
     struct
     {
         MPOS_Sprite terrain;

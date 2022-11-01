@@ -13,7 +13,7 @@ void RNV_WorldHandleEvent(RNV_World *world, SDL_Event event)
     case SDL_KEYUP:
         switch (event.key.keysym.sym)
         {
-        case SDLK_F3:
+        case SDLK_F2:
             if (world->states.SHOW_GRID)
             {
                 world->states.SHOW_GRID = 0;
@@ -187,7 +187,10 @@ void RNV_WorldUpdate(RNV_World *world)
 
     for (int i = 0; i < world->grid->t_c; i++)
     {
-        MPOS_SpriteUpdate(&world->map[i].layer.terrain);
+        if (world->map[i].layer.terrain.sh != NULL)
+        {
+            MPOS_SpriteUpdate(&world->map[i].layer.terrain);
+        }
     }
 }
 
@@ -210,7 +213,9 @@ void RNV_WorldDraw(RNV_World *world, SDL_Renderer *r)
             world->map[i].rect->y + world->map[i].rect->h >= 0 ||
             world->map[i].rect->y <= world->rect.h)
         {
-            MPOS_SpriteDraw(world->map[i].layer.terrain, r);
+            /* check for layer */
+            if (world->map[i].layer.terrain.sh != NULL)
+                MPOS_SpriteDraw(world->map[i].layer.terrain, r);
         }
     }
 

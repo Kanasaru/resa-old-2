@@ -2,12 +2,86 @@
 #include <SDL2/SDL.h>
 
 #include "mpos/mpos.h"
-#include "world/generator.h"
+#include "oab.h"
+#include "world.h"
 #include "world/objects/island.h"
+#include "world/flora/water.h"
+#include "world/generator.h"
+
+extern App app;
 
 
-void RNV_GenWorldCreate(void)
+RNV_World * RNV_GenWorldCreate(SDL_Rect rect, int tile_s)
 {
+    MPOS_Grid *grd = MPOS_CreateGrid(rect.x, rect.y,
+                                     rect.w, rect.h, 
+                                     tile_s, tile_s);
+    if (grd == NULL)
+    {
+        printf("RNV_Error: Error creating world grid.\n");
+        return NULL;
+    }
+    MPOS_SetGridColor(grd, 0x56fc03);
+
+    size_t gms = sizeof(RNV_World);
+    gms += grd->t_c * sizeof(RNV_WorldField);
+    RNV_World *world = (RNV_World *)malloc(gms);
+    if (world == NULL)
+    {
+        printf("RNV_Error: Error creating world.\n");
+        return NULL;
+    }
+
+    world->rect.x = rect.x;
+    world->rect.y = rect.y;
+    world->rect.w = rect.w * tile_s;
+    world->rect.h = rect.h * tile_s;
+    world->grid = grd;
+
+    world->states.SHOW_GRID = 0;
+    world->states.MOVE = RNV_WORLD_MOVE_NO;
+
+    world->spshs.tiles = MPOS_CreateSpriteSheet(app.renderer,
+                                                RNV_SPSH_TILES, 32, 32);
+    if (world->spshs.tiles == NULL)
+    {
+        printf("Failed to create world sprite sheet: %s\n", RNV_SPSH_TILES);
+        return NULL;
+    }
+
+    RNV_GenWorldInitFields(world);
+    RNV_GenWorldFillWater(world);
+
+    return world;
+}
+
+void RNV_GenWorldInitFields(RNV_World *world)
+{
+    for (int i = 0; i < world->grid->t_c; i++)
+    {
+        world->map[i].rect = &world->grid->tiles[i].rect;
+        world->map[i].key = &world->grid->tiles[i].key;
+        world->map[i].layer.terrain.sh = NULL;
+        world->map[i].layer.structures.sh = NULL;
+        world->map[i].layer.fauna.sh = NULL;
+        world->map[i].layer.flora.sh = NULL;
+        world->map[i].layer.objects.sh = NULL;
+    }
+}
+
+void RNV_GenWorldFillWater(RNV_World *world)
+{
+    for (int i = 0; i < world->grid->t_c; i++)
+    {
+        world->map[i].layer.terrain.rect.x = world->map[i].rect->x;
+        world->map[i].layer.terrain.rect.y = world->map[i].rect->y;
+        world->map[i].layer.terrain.rect.w = world->map[i].rect->w;
+        world->map[i].layer.terrain.rect.h = world->map[i].rect->h;
+        world->map[i].layer.terrain.gk = world->grid->tiles[i].key;
+        world->map[i].layer.terrain.sh = world->spshs.tiles;
+        world->map[i].layer.terrain.k = RNV_SPSH_K_WATER;
+        world->map[i].layer.terrain.cb = RNV_FieldWaterUpdate;
+    }
 }
 
 RNV_Island * RNV_GenIslandCreate(int32_t x, int32_t y, 

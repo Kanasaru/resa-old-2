@@ -6,6 +6,7 @@
 #include "oab.h"
 #include "init.h"
 #include "utl/media.h"
+#include "world/generator.h"
 
 
 void RNV_InitSDL(void)
@@ -66,6 +67,22 @@ void RNV_InitGame(void)
     app.state.QUIT = 0;
 
     RNV_InitMedia();
+
+    app.world = RNV_GenWorldCreate((SDL_Rect) { 0, 0, 
+                                                RNV_WORLD_WIDTH, 
+                                                RNV_WORLD_HEIGHT }, 
+                                                RNV_WORLD_TILE_HEIGHT);
+    if (app.world == NULL)
+    {
+        printf("Failed to create world\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    RNV_WorldSetRenderRect(app.world, 
+                           (SDL_Rect) { 0, 
+                                        RNV_PANEL_HEIGHT, 
+                                        RNV_SCREEN_WIDTH, 
+                                        RNV_SCREEN_HEIGHT - RNV_PANEL_HEIGHT });
 }
 
 void RNV_Quit(void)

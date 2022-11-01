@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <SDL2/SDL.h>
 
-#include "world/objects/island.h"
+#include "objects/island.h"
 
 
 #define RNV_GEN_ISLANDSIZE_B_W 50
@@ -18,7 +18,11 @@
 extern "C" {
 #endif
 
-void RNV_GenWorldCreate(void);
+RNV_World * RNV_GenWorldCreate(SDL_Rect rect, int tile_s);
+
+void RNV_GenWorldInitFields(RNV_World *world);
+
+void RNV_GenWorldFillWater(RNV_World *world);
 
 RNV_Island * RNV_GenIslandCreate(int32_t x, int32_t y, 
                                  u_int16_t w, u_int16_t h);
