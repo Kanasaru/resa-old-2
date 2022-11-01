@@ -10,7 +10,7 @@
 
 #include "mpos_sprite.h"
 
-#define MPOS_FORM_STD_BG_COLOR 0x000000;
+#define MPOS_FORM_STD_BG_COLOR 0x000000
 
 
 #ifdef __cplusplus

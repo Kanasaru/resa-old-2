@@ -31,7 +31,7 @@ void MPOS_FormAddObject(MPOS_Form **form, MPOS_FormObj *obj)
 {
     size_t gms = sizeof(MPOS_Form);
     gms += ((*form)->o_c + 1) * sizeof(MPOS_FormObj);
-    *form = (MPOS_Form*) realloc(*grp, gms);
+    *form = (MPOS_Form*) realloc(*form, gms);
 
     if (form != NULL)
     {
