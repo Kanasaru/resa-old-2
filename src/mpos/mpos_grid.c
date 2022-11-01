@@ -70,7 +70,7 @@ void MPOS_SetGridColor(MPOS_Grid *grid, u_int32_t color)
     u_int8_t r = color & 0xff;
     u_int8_t g = (color>>8) & 0xff;
     u_int8_t b = (color>>16) & 0xff;
-    u_int8_t a = 255;
+    u_int8_t a = 0xff;
 
     grid->c = (SDL_Color) { r, g, b, a };
 }

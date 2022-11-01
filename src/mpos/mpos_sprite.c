@@ -110,22 +110,24 @@ void MPOS_SpriteGroupRemove(MPOS_SpriteGroup **grp, MPOS_Sprite *sprite)
         }
     }
 
-    if (ak >= 0)
+    if (ak == -1)
     {
-        for (size_t j = ak; j < (*grp)->sc - 1; j++)
-        {
-            (*grp)->sprites[j].i = j;
-            (*grp)->sprites[j].sh = (*grp)->sprites[j + 1].sh;
-            (*grp)->sprites[j].k = (*grp)->sprites[j + 1].k;
-            (*grp)->sprites[j].rect = (*grp)->sprites[j + 1].rect;
-            (*grp)->sprites[j].cb = (*grp)->sprites[j + 1].cb;
-        }
-        (*grp)->sc--;
-
-        size_t gms = sizeof(MPOS_SpriteGroup);
-        gms += (*grp)->sc * sizeof(MPOS_Sprite);
-        *grp = (MPOS_SpriteGroup*) realloc(*grp, gms);
+        return;
     }
+
+    for (size_t j = ak; j < (*grp)->sc - 1; j++)
+    {
+        (*grp)->sprites[j].i = j;
+        (*grp)->sprites[j].sh = (*grp)->sprites[j + 1].sh;
+        (*grp)->sprites[j].k = (*grp)->sprites[j + 1].k;
+        (*grp)->sprites[j].rect = (*grp)->sprites[j + 1].rect;
+        (*grp)->sprites[j].cb = (*grp)->sprites[j + 1].cb;
+    }
+    (*grp)->sc--;
+
+    size_t gms = sizeof(MPOS_SpriteGroup);
+    gms += (*grp)->sc * sizeof(MPOS_Sprite);
+    *grp = (MPOS_SpriteGroup*) realloc(*grp, gms);
 }
 
 void MPOS_SpriteGroupDraw(MPOS_SpriteGroup *grp, SDL_Renderer *r)

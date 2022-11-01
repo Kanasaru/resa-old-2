@@ -11,6 +11,7 @@
 #include "mpos/mpos_noise.h"
 #include "mpos/mpos_grid.h"
 #include "mpos/mpos_sprite.h"
+#include "mpos/mpos_forms.h"
 
 #define MPOS_TIMER_FORMAT "%s: %f ms"
 #define MPOS_SCREENSHOT_FORMAT "%s%s_%02d-%02d-%02d_%02d-%02d-%02d%s"
