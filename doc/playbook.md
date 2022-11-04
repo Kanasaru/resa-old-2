@@ -40,7 +40,7 @@ Simple and very straight forward. You are a lord or king or whatever and get int
 - window mode
 - minimum resolution: 800 x 600
 - minimum FPS: around 60
-- 2.5D, top-down
+- Isometic-2D
 <br><br>
 ## Controls
 - arrow keys and wasd to move the world

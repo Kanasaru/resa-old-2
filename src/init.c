@@ -68,21 +68,24 @@ void RNV_InitGame(void)
 
     RNV_InitMedia();
 
-    app.world = RNV_GenWorldCreate((SDL_Rect) { 0, 0, 
-                                                RNV_WORLD_WIDTH, 
-                                                RNV_WORLD_HEIGHT }, 
-                                                RNV_WORLD_TILE_HEIGHT);
+    SDL_Rect world_rect;
+    world_rect.x = 0;
+    world_rect.y = 0;
+    world_rect.w = RNV_WORLD_WIDTH;
+    world_rect.h = RNV_WORLD_HEIGHT;
+    app.world = RNV_GenWorldCreate(world_rect, RNV_WORLD_TILE_WIDTH);
     if (app.world == NULL)
     {
         printf("Failed to create world\n");
         exit(EXIT_FAILURE);
     }
     
-    RNV_WorldSetRenderRect(app.world, 
-                           (SDL_Rect) { 0, 
-                                        RNV_PANEL_HEIGHT, 
-                                        RNV_SCREEN_WIDTH, 
-                                        RNV_SCREEN_HEIGHT - RNV_PANEL_HEIGHT });
+    SDL_Rect render_rect;
+    render_rect.x = 0;
+    render_rect.y = RNV_PANEL_HEIGHT;
+    render_rect.w = RNV_SCREEN_WIDTH;
+    render_rect.h = RNV_SCREEN_HEIGHT - RNV_PANEL_HEIGHT;
+    RNV_WorldSetRenderRect(app.world, render_rect);
 }
 
 void RNV_Quit(void)

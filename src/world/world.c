@@ -61,112 +61,35 @@ void RNV_WorldMove(RNV_World *world)
     int move_x = 0;
     int move_y = 0;
 
-    int px_right = world->rect.w - world->dstrect.w - abs(0 - world->rect.x);
-    int px_left = abs(0 - world->rect.x);
-    int px_up = abs(0 - world->rect.y);
-    int px_down = world->rect.h - world->dstrect.h - abs(0 - world->rect.y);
-
     switch (world->states.MOVE)
     {
     case RNV_WORLD_MOVE_UP:
-        if (px_up != 0)
-        {
-            if (px_up < RNV_WORLD_MOVE_SPEED)
-                move_y = px_up;
-            else
-                move_y = RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = RNV_WORLD_MOVE_SPEED;
+        move_x = RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_DOWN:
-        if (px_down != 0)
-        {
-            if (px_down < RNV_WORLD_MOVE_SPEED)
-                move_y = -px_down;
-            else
-                move_y = -RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = -RNV_WORLD_MOVE_SPEED;
+        move_x = -RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_LEFT:
-        if (px_left != 0)
-        {
-            if (px_left < RNV_WORLD_MOVE_SPEED)
-                move_x = px_left;
-            else
-                move_x = RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = -RNV_WORLD_MOVE_SPEED;
+        move_x = RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_RIGHT:
-        if (px_right != 0)
-        {
-            if (px_right < RNV_WORLD_MOVE_SPEED)
-                move_x = -px_right;
-            else
-                move_x = -RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = RNV_WORLD_MOVE_SPEED;
+        move_x = -RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_TL:
-        if (px_up != 0)
-        {
-            if (px_up < RNV_WORLD_MOVE_SPEED)
-                move_y = px_up;
-            else
-                move_y = RNV_WORLD_MOVE_SPEED;
-        }
-        if (px_left != 0)
-        {
-            if (px_left < RNV_WORLD_MOVE_SPEED)
-                move_x = px_left;
-            else
-                move_x = RNV_WORLD_MOVE_SPEED;
-        }
+        move_x = RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_TR:
-        if (px_up != 0)
-        {
-            if (px_up < RNV_WORLD_MOVE_SPEED)
-                move_y = px_up;
-            else
-                move_y = RNV_WORLD_MOVE_SPEED;
-        }
-        if (px_right != 0)
-        {
-            if (px_right < RNV_WORLD_MOVE_SPEED)
-                move_x = -px_right;
-            else
-                move_x = -RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_BL:
-        if (px_down != 0)
-        {
-            if (px_down < RNV_WORLD_MOVE_SPEED)
-                move_y = -px_down;
-            else
-                move_y = -RNV_WORLD_MOVE_SPEED;
-        }
-        if (px_left != 0)
-        {
-            if (px_left < RNV_WORLD_MOVE_SPEED)
-                move_x = px_left;
-            else
-                move_x = RNV_WORLD_MOVE_SPEED;
-        }
+        move_y = -RNV_WORLD_MOVE_SPEED;
         break;
     case RNV_WORLD_MOVE_BR:
-        if (px_down != 0)
-        {
-            if (px_down < RNV_WORLD_MOVE_SPEED)
-                move_y = -px_down;
-            else
-                move_y = -RNV_WORLD_MOVE_SPEED;
-        }
-        if (px_right != 0)
-        {
-            if (px_right < RNV_WORLD_MOVE_SPEED)
-                move_x = -px_right;
-            else
-                move_x = -RNV_WORLD_MOVE_SPEED;
-        }
+        move_x = -RNV_WORLD_MOVE_SPEED;
         break;
     }
 
@@ -207,16 +130,18 @@ void RNV_WorldDraw(RNV_World *world, SDL_Renderer *r)
 
     for (size_t i = 0; i < world->grid->t_c; i++)
     {
-        /* only draw sprite if visibile */
-        if (world->map[i].rect->x + world->map[i].rect->h >= 0 ||
-            world->map[i].rect->x <= world->rect.w ||
-            world->map[i].rect->y + world->map[i].rect->h >= 0 ||
-            world->map[i].rect->y <= world->rect.h)
-        {
-            /* check for layer */
-            if (world->map[i].layer.terrain.sh != NULL)
-                MPOS_SpriteDraw(world->map[i].layer.terrain, r);
-        }
+        /* calculate iso rect */
+        int32_t x = world->map[i].layer.terrain.rect.x;
+        int32_t y = world->map[i].layer.terrain.rect.y;
+        MPOS_Vector2 spr = MPOS_GetTileIsoGridPos(world->grid, x, y);
+        world->map[i].layer.terrain.iso_rect.x = spr.x;
+        world->map[i].layer.terrain.iso_rect.y = spr.y;
+        world->map[i].layer.terrain.iso_rect.w = RNV_WORLD_TILE_WIDTH;
+        world->map[i].layer.terrain.iso_rect.h = RNV_WORLD_TILE_HEIGHT;
+
+        /* check for layer */
+        if (world->map[i].layer.terrain.sh != NULL)
+            MPOS_SpriteDrawIso(world->map[i].layer.terrain, r);
     }
 
     if (world->states.SHOW_GRID)

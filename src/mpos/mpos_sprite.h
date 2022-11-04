@@ -29,6 +29,7 @@ typedef struct
     MPOS_SpriteSheet *sh;   /* sprite sheet pointer */
     uint32_t k;             /* key in sprite sheet */
     SDL_Rect rect;          /* position (x, y) and size (w, h) */
+    SDL_Rect iso_rect;
     void (*cb)(uint32_t );  /* pointer to update function */
 } MPOS_Sprite;
 
@@ -51,6 +52,8 @@ void MPOS_DrawClip(MPOS_SpriteSheet *sh, uint32_t k, SDL_Renderer *r, SDL_Rect d
 
 /* draws given sprite to given renderer */
 void MPOS_SpriteDraw(MPOS_Sprite sprite, SDL_Renderer *r);
+
+void MPOS_SpriteDrawIso(MPOS_Sprite sprite, SDL_Renderer *r);
 
 /* creates a sprite group */
 MPOS_SpriteGroup * MPOS_CreateSpriteGroup(void);

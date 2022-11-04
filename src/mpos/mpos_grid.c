@@ -358,10 +358,20 @@ MPOS_Vector2 MPOS_GetTileIsoGridVector(MPOS_Grid *grid, MPOS_Vector2 vec)
 {
     MPOS_Vector2 iso;
 
-    iso.x = vec.x * MPOS_Grid_i_x * 0.5 * grid->t_w + 
-            vec.y * MPOS_Grid_j_x * 0.5 * grid->t_w;
-    iso.y = vec.x * MPOS_Grid_i_y * 0.5 * grid->t_h + 
-            vec.y * MPOS_Grid_j_y * 0.5 * grid->t_h;
+    iso.x = vec.x * MPOS_Grid_i_x * 0.5f * grid->t_w + 
+            vec.y * MPOS_Grid_j_x * 0.5f * grid->t_w;
+    iso.y = vec.x * MPOS_Grid_i_y * 0.5f * grid->t_h + 
+            vec.y * MPOS_Grid_j_y * 0.5f * grid->t_h;
+
+    return iso;
+}
+
+MPOS_Vector2 MPOS_GetTileIsoGridPos(MPOS_Grid *grid, int32_t x, int32_t y)
+{
+    MPOS_Vector2 iso;
+
+    iso.x = x * MPOS_Grid_i_x * 0.5f + y * MPOS_Grid_j_x * 0.5f;
+    iso.y = x * MPOS_Grid_i_y * 0.5f + y * MPOS_Grid_j_y * 0.5f;
 
     return iso;
 }
@@ -385,15 +395,34 @@ MPOS_Vector2 MPOS_GetTileGridVector(MPOS_Grid *grid, MPOS_Vector2 vec)
     MPOS_Matrix inv;
     MPOS_Vector2 gvec;
 
-    mat.a = MPOS_Grid_i_x * 0.5 * grid->t_w;
-    mat.b = MPOS_Grid_j_x * 0.5 * grid->t_w;
-    mat.c = MPOS_Grid_i_y * 0.5 * grid->t_h;
-    mat.d = MPOS_Grid_j_y * 0.5 * grid->t_h;
+    mat.a = MPOS_Grid_i_x * 0.5f * grid->t_w;
+    mat.b = MPOS_Grid_j_x * 0.5f * grid->t_w;
+    mat.c = MPOS_Grid_i_y * 0.5f * grid->t_h;
+    mat.d = MPOS_Grid_j_y * 0.5f * grid->t_h;
   
     inv = MPOS_InvertMatrix(mat);
   
     gvec.x = vec.x * inv.a + vec.y * inv.b;
     gvec.y = vec.x * inv.c + vec.y * inv.d;
+
+    return gvec;
+}
+
+MPOS_Vector2 MPOS_GetTileGridPos(MPOS_Grid *grid,  int32_t x, int32_t y)
+{
+    MPOS_Matrix mat;
+    MPOS_Matrix inv;
+    MPOS_Vector2 gvec;
+
+    mat.a = MPOS_Grid_i_x * 0.5f;
+    mat.b = MPOS_Grid_j_x * 0.5f;
+    mat.c = MPOS_Grid_i_y * 0.5f;
+    mat.d = MPOS_Grid_j_y * 0.5f;
+  
+    inv = MPOS_InvertMatrix(mat);
+  
+    gvec.x = x * inv.a + y * inv.b;
+    gvec.y = x * inv.c + y * inv.d;
 
     return gvec;
 }

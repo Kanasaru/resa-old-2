@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 
     RNV_InitSDL();
     RNV_InitGame();
-
+    
     while (app.state.QUIT == 0)
     {
         MPOS_MpfStart(app.mpos);

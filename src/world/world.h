@@ -8,13 +8,28 @@
 #include "objects/island.h"
 
 #define RNV_WORLD_WIDTH  100
-#define RNV_WORLD_HEIGHT 60
+#define RNV_WORLD_HEIGHT 100
 #define RNV_WORLD_TILE_WIDTH 32
-#define RNV_WORLD_TILE_HEIGHT 32
+#define RNV_WORLD_TILE_HEIGHT 16
 
-#define RNV_SPSH_TILES "res/sprites/rnv_tiles_32x32.png"
+#define RNV_SPSH_TILES "res/sprites/tiles_32x16.png"
+#define RNV_SPSH_K_GRIDR 0
+#define RNV_SPSH_K_GRIDG 1
 #define RNV_SPSH_K_WATER 2
 #define RNV_SPSH_K_GRAS 3
+#define RNV_SPSH_K_SAND 4
+#define RNV_SPSH_K_BO_BL 8
+#define RNV_SPSH_K_BO_TL 9
+#define RNV_SPSH_K_BO_TR 10
+#define RNV_SPSH_K_BO_BR 11
+#define RNV_SPSH_K_BO_IC_R 12
+#define RNV_SPSH_K_BO_IC_L 13
+#define RNV_SPSH_K_BO_IC_T 14
+#define RNV_SPSH_K_BO_IC_B 15
+#define RNV_SPSH_K_BO_C_R 16
+#define RNV_SPSH_K_BO_C_L 17
+#define RNV_SPSH_K_BO_C_T 18
+#define RNV_SPSH_K_BO_C_B 19
 
 #define RNV_WORLD_MOVE_NO    0x00
 #define RNV_WORLD_MOVE_UP    0x01

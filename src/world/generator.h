@@ -24,6 +24,9 @@ void RNV_GenWorldInitFields(RNV_World *world);
 
 void RNV_GenWorldFillWater(RNV_World *world);
 
+void RNV_GenWorldRaiseIsland(RNV_World *world, RNV_Island *island,
+                             u_int32_t world_key);
+
 RNV_Island * RNV_GenIslandCreate(int32_t x, int32_t y, 
                                  u_int16_t w, u_int16_t h);
 

@@ -13,8 +13,8 @@
 
 typedef struct
 {
-    float x;
-    float y;
+    int32_t x;
+    int32_t y;
 } MPOS_Vector2;
 
 
@@ -22,10 +22,10 @@ typedef struct
 
 typedef struct
 {
-    float a;
-    float b;
-    float c;
-    float d;
+    int32_t a;
+    int32_t b;
+    int32_t c;
+    int32_t d;
 } MPOS_Matrix;
 
 
@@ -122,10 +122,14 @@ MPOS_GridTileNeighbors MPOS_GetIsoTileNeighborsByKey(MPOS_Grid *grid,
 /* calculates isometric tile vector of given grid and tile vector */
 MPOS_Vector2 MPOS_GetTileIsoGridVector(MPOS_Grid *grid, MPOS_Vector2 vec);
 
+MPOS_Vector2 MPOS_GetTileIsoGridPos(MPOS_Grid *grid, int32_t x, int32_t y);
+
 /* inverts given matrix */
 MPOS_Matrix MPOS_InvertMatrix(MPOS_Matrix matrix);
 
 /* calculates tile vector of given grid and isometric tile vector */
 MPOS_Vector2 MPOS_GetTileGridVector(MPOS_Grid *grid, MPOS_Vector2 vec);
+
+MPOS_Vector2 MPOS_GetTileGridPos(MPOS_Grid *grid,  int32_t x, int32_t y);
 
 #endif /* !__MPOS_GRID_H__ */

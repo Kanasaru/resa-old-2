@@ -75,7 +75,7 @@ void RNV_PlayMusic(void)
 {
     if (Mix_PlayingMusic() == 0)
     {
-        if (media.c_m < RNV_MUSIC_COUNT)
+        if (media.c_m < RNV_MUSIC_COUNT - 1)
         {
             media.c_m++;
         }

@@ -7,8 +7,8 @@
 #include "world/world.h"
 
 
-#define RNV_SCREEN_WIDTH  800
-#define RNV_SCREEN_HEIGHT 600
+#define RNV_SCREEN_WIDTH  1200
+#define RNV_SCREEN_HEIGHT 960
 #define RNV_FPS           60
 #define RNV_PANEL_HEIGHT  30
 #define RNV_STD_FONT_SIZE 18

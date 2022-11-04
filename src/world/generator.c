@@ -42,7 +42,7 @@ RNV_World * RNV_GenWorldCreate(SDL_Rect rect, int tile_s)
     world->states.MOVE = RNV_WORLD_MOVE_NO;
 
     world->spshs.tiles = MPOS_CreateSpriteSheet(app.renderer,
-                                                RNV_SPSH_TILES, 32, 32);
+                                                RNV_SPSH_TILES, 32, 16);
     if (world->spshs.tiles == NULL)
     {
         printf("Failed to create world sprite sheet: %s\n", RNV_SPSH_TILES);
@@ -51,6 +51,12 @@ RNV_World * RNV_GenWorldCreate(SDL_Rect rect, int tile_s)
 
     RNV_GenWorldInitFields(world);
     RNV_GenWorldFillWater(world);
+
+    RNV_Island *island_m = RNV_GenIslandCreate(0, 0, 
+                                               RNV_GEN_ISLANDSIZE_M_W,
+                                               RNV_GEN_ISLANDSIZE_M_H);
+    RNV_GenIslandShape(island_m);
+    RNV_GenWorldRaiseIsland(world, island_m, 0);
 
     return world;
 }
@@ -81,6 +87,26 @@ void RNV_GenWorldFillWater(RNV_World *world)
         world->map[i].layer.terrain.sh = world->spshs.tiles;
         world->map[i].layer.terrain.k = RNV_SPSH_K_WATER;
         world->map[i].layer.terrain.cb = RNV_FieldWaterUpdate;
+    }
+}
+
+void RNV_GenWorldRaiseIsland(RNV_World *world, RNV_Island *island,
+                             u_int32_t world_key)
+{
+    u_int32_t w_k = world_key;
+    u_int32_t i_k = 0;
+
+    for (size_t y = 0; y < island->rect.h; y++)
+    {
+        for (size_t x = 0; x < island->rect.w; x++)
+        {
+            world->map[w_k].layer.terrain.k = island->fields[i_k].layer.terrain;
+            world->map[w_k].layer.terrain.cb = RNV_FieldWaterUpdate;
+
+            i_k++;
+            w_k++;
+        }
+        w_k += world->grid->rect.w - island->rect.w;
     }
 }
 
@@ -115,7 +141,8 @@ void RNV_GenIslandShape(RNV_Island *island)
 
     size_t i = 0;
     
-    island->seed = MPOS_NoiseSeed(0, MPOS_NOISE_MAX_VAL);
+    //island->seed = MPOS_NoiseSeed(0, MPOS_NOISE_MAX_VAL);
+    island->seed = 7755;
 
     for (size_t y = 0; y < island->rect.h; y++)
     {
@@ -130,15 +157,22 @@ void RNV_GenIslandShape(RNV_Island *island)
 
             if (e < 0.45f)
             {
-                island->fields[i].layer.terrain = 0;
+                island->fields[i].layer.terrain = RNV_SPSH_K_WATER;
             } 
             else
             {
-                island->fields[i].layer.terrain = 1;
+                island->fields[i].layer.terrain = RNV_SPSH_K_GRAS;
             }
 
             i++;
         }   
+    }
+
+    for (size_t y = 0; y < island->rect.h; y++)
+    {
+        for (size_t x = 0; x < island->rect.w; x++)
+        {
+        }
     }
 }
 

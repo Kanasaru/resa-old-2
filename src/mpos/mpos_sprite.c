@@ -66,6 +66,11 @@ void MPOS_SpriteDraw(MPOS_Sprite sprite, SDL_Renderer *r)
     MPOS_DrawClip(sprite.sh, sprite.k, r, sprite.rect);
 }
 
+void MPOS_SpriteDrawIso(MPOS_Sprite sprite, SDL_Renderer *r)
+{
+    MPOS_DrawClip(sprite.sh, sprite.k, r, sprite.iso_rect);
+}
+
 MPOS_SpriteGroup * MPOS_CreateSpriteGroup(void)
 {
     size_t gms = sizeof(MPOS_SpriteGroup);
