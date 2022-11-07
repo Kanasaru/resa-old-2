@@ -5,6 +5,7 @@
 
 #include "mpos/mpos.h"
 #include "world/world.h"
+#include "utl/event.h"
 
 
 #define RNV_SCREEN_WIDTH  1200
@@ -28,6 +29,7 @@ typedef struct
         u_int16_t QUIT;           /* game quitting */
     } state;
     RNV_World *world;
+    RNV_EventQueue *eq;
 } App;
 
 App app;

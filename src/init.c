@@ -66,6 +66,8 @@ void RNV_InitGame(void)
 
     app.state.QUIT = 0;
 
+    app.eq = RNV_EventQueueCreate();
+
     RNV_InitMedia();
 
     SDL_Rect world_rect;
@@ -92,6 +94,7 @@ void RNV_Quit(void)
 {
     MPOS_Destroy(app.mpos);
     RNV_DestroyMedia();
+    RNV_EventQueueDelete();
     SDL_DestroyWindow(app.win);
     Mix_Quit();
     TTF_Quit();

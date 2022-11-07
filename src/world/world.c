@@ -35,6 +35,9 @@ void RNV_WorldHandleEvent(RNV_World *world, SDL_Event event)
         case SDLK_RIGHT:
             world->states.MOVE = RNV_WORLD_MOVE_RIGHT ^ world->states.MOVE;
             break;
+        case SDLK_c:
+            RNV_WorldCenterWorld(world);
+            break;
         }
         break;
     case SDL_KEYDOWN:
@@ -95,10 +98,16 @@ void RNV_WorldMove(RNV_World *world)
 
     if (move_x != 0 || move_y != 0)
     {
-        MPOS_MoveGrid(world->grid, move_x, move_y);
         world->rect.x += move_x;
         world->rect.y += move_y;
     }
+
+    RNV_Event ev;
+    ev.type = RNV_EV_MAP;
+    ev.map.type = RNV_EV_MAP_MOVE;
+    ev.map.mx = move_x;
+    ev.map.my = move_y;
+    RNV_EventPush(ev);
 }
 
 void RNV_WorldUpdate(RNV_World *world)
@@ -115,6 +124,8 @@ void RNV_WorldUpdate(RNV_World *world)
             MPOS_SpriteUpdate(&world->map[i].layer.terrain);
         }
     }
+
+    RNV_EventRemoveTypeFromQueue(RNV_EV_MAP);
 }
 
 void RNV_WorldDraw(RNV_World *world, SDL_Renderer *r)
@@ -167,4 +178,29 @@ void RNV_WorldSetRenderRect(RNV_World *world, SDL_Rect rect)
                                        SDL_TEXTUREACCESS_TARGET,
                                        world->dstrect.w,
                                        world->dstrect.h);
+    
+    RNV_WorldCenterWorld(world);
+}
+
+void RNV_WorldCenterWorld(RNV_World *world)
+{
+    /* buffer current world position */
+    int32_t b_x = world->rect.x;
+    int32_t b_y = world->rect.y;
+    
+    /* calculate and set centered position */
+    world->rect.x = (world->dstrect.w / 2 - RNV_WORLD_TILE_WIDTH / 2) -
+                    (RNV_WORLD_HEIGHT * RNV_WORLD_TILE_HEIGHT) / 2 -
+                     (world->dstrect.h / 4);
+    world->rect.y = -((world->dstrect.w / 2) + RNV_WORLD_TILE_WIDTH / 2) -
+                    (RNV_WORLD_HEIGHT * RNV_WORLD_TILE_HEIGHT) / 2 -
+                     (world->dstrect.h / 4);
+    
+    /* set moving event to move sprites */
+    RNV_Event ev;
+    ev.type = RNV_EV_MAP;
+    ev.map.type = RNV_EV_MAP_MOVE;
+    ev.map.mx = world->rect.x - b_x;
+    ev.map.my = world->rect.y - b_y;
+    RNV_EventPush(ev);
 }

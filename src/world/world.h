@@ -7,8 +7,8 @@
 #include "objects/fields.h"
 #include "objects/island.h"
 
-#define RNV_WORLD_WIDTH  100
-#define RNV_WORLD_HEIGHT 100
+#define RNV_WORLD_WIDTH  150
+#define RNV_WORLD_HEIGHT 150
 #define RNV_WORLD_TILE_WIDTH 32
 #define RNV_WORLD_TILE_HEIGHT 16
 
@@ -74,5 +74,7 @@ void RNV_WorldUpdate(RNV_World *world);
 void RNV_WorldDraw(RNV_World *world, SDL_Renderer *r);
 
 void RNV_WorldSetRenderRect(RNV_World *world, SDL_Rect rect);
+
+void RNV_WorldCenterWorld(RNV_World *world);
 
 #endif /* !__RNV_WORLD_H__ */
